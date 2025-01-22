@@ -11,7 +11,6 @@ This is a solution to the [Personal finance app challenge on Frontend Mentor](ht
 - [My process](#my-process)
   - [Built with](#built-with)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 **Note: Delete this note and update the table of contents based on what sections you keep.**
 
@@ -64,11 +63,3 @@ Users should be able to:
 - Website - [https://brianmillonte.vercel.app/](https://brianmillonte.vercel.app/)
 - Frontend Mentor - [@briuwu](https://www.frontendmentor.io/profile/briuwu)
 - Instagram - [@\_briuwu](https://www.instagram.com/_briuwu/)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
