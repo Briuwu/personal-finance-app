@@ -1,4 +1,5 @@
 import { Balances } from "./components/balances";
+import { BudgetsOverview } from "./components/budgets-overview";
 import { PotsOverview } from "./components/pots-overview";
 import { TransactionsOverview } from "./components/transactions-overview";
 
@@ -11,6 +12,9 @@ export default function Home() {
         <div className="space-y-4">
           <PotsOverview />
           <TransactionsOverview />
+        </div>
+        <div className="space-y-4">
+          <BudgetsOverview />
         </div>
       </div>
     </div>

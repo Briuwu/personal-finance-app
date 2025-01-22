@@ -77,7 +77,7 @@ export function AppSidebar() {
                       <Link
                         href={item.href}
                         className={cn(
-                          "text-preset-3 text-grey-300 font-bold",
+                          "text-preset-3 font-bold text-grey-300",
                           active && "text-grey-900",
                         )}
                       >
