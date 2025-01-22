@@ -6,11 +6,15 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.15",
     "@hookform/resolvers": "^3.10.0",
+    "@neondatabase/serverless": "^0.10.4",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-alert-dialog": "^1.1.4",
     "@radix-ui/react-aspect-ratio": "^1.1.1",
@@ -42,6 +46,8 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "date-fns": "^4.1.0",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.38.4",
     "embla-carousel-react": "^8.5.2",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.471.0",
@@ -64,6 +70,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.30.2",
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
     "postcss": "^8",
