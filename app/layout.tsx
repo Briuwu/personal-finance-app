@@ -23,7 +23,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${publicSans.variable} antialiased`}>{children}</body>
+        <body
+          className={`${publicSans.variable} bg-beige-100 w-full antialiased`}
+        >
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );
