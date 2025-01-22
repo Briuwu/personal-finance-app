@@ -41,6 +41,31 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --beige-500: #98908b;
+    --beige-100: #f8f4f0;
+
+    --grey-900: #201f24;
+    --grey-500: #696868;
+    --grey-300: #b3b3b3;
+    --grey-100: #f2f2f2;
+
+    --green: #277c78;
+    --yellow: #f2cdac;
+    --cyan: #82c9d7;
+    --navy: #626070;
+    --red: #c94736;
+    --purple: #826cb0;
+
+    --purple-2: #af81ba;
+    --turquoise: #597c7c;
+    --brown: #93674f;
+    --magenta: #934f6f;
+    --blue: #3f82b2;
+    --navy-grey: #97a0ac;
+    --army-green: #7f9161;
+    --gold: #cab361;
+    --orange: #be6c49;
   }
   .dark {
     --background: 0 0% 3.9%;
