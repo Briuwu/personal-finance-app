@@ -111,3 +111,33 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .text-preset-1 {
+    @apply text-[32px] font-bold leading-[120%] tracking-normal;
+  }
+
+  .text-preset-2 {
+    @apply text-[20px] font-bold leading-[120%] tracking-normal;
+  }
+
+  .text-preset-3 {
+    @apply text-[16px] font-bold leading-[150%] tracking-normal;
+  }
+
+  .text-preset-4-regular {
+    @apply text-[14px] font-normal leading-[150%] tracking-normal;
+  }
+
+  .text-preset-4-bold {
+    @apply text-[14px] font-bold leading-[150%] tracking-normal;
+  }
+
+  .text-preset-5-regular {
+    @apply text-[12px] font-normal leading-[150%] tracking-normal;
+  }
+
+  .text-preset-5-bold {
+    @apply text-[12px] font-bold leading-[150%] tracking-normal;
+  }
+}
