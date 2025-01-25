@@ -1,6 +1,7 @@
 import { Balances } from "./components/balances";
 import { BudgetsOverview } from "./components/budgets-overview";
 import { PotsOverview } from "./components/pots-overview";
+import { RecurringBillsOverview } from "./components/recurring-bills-overview";
 import { TransactionsOverview } from "./components/transactions-overview";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
         </div>
         <div className="space-y-4">
           <BudgetsOverview />
+          <RecurringBillsOverview />
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 export const BudgetsOverview = () => {
   const budgets = data.budgets;
   return (
-    <section className="space-y-8 rounded-xl bg-white p-8">
+    <section className="flex flex-col rounded-xl bg-white p-8 md:min-h-[450px]">
       <div className="flex items-center justify-between">
         <h4 className="text-preset-2 text-grey-900">Budgets</h4>
         <Link
@@ -19,7 +19,7 @@ export const BudgetsOverview = () => {
           See Details <Image src={caretRight} alt="" />
         </Link>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-[1fr,.35fr]">
+      <div className="my-auto grid md:grid-cols-[1fr,.35fr]">
         <BudgetsPieChart />
         <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
           {budgets.map((budget, idx) => (

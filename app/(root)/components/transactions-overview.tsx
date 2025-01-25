@@ -17,7 +17,7 @@ export const TransactionsOverview = () => {
           See Details <Image src={caretRight} alt="" />
         </Link>
       </div>
-      <div className="divide-y">
+      <div className="h-full max-h-[438px] divide-y overflow-auto">
         {data.transactions.slice(0, 10).map((transaction, idx) => {
           const date = new Date(transaction.date);
           const formattedDate = date.toLocaleDateString("en-GB", {

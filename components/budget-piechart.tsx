@@ -46,7 +46,7 @@ export function BudgetsPieChart() {
   return (
     <ChartContainer
       config={chartConfig}
-      className="aspect-square max-h-[250px] place-self-center"
+      className="aspect-square h-full max-h-[250px] w-full place-self-center"
     >
       <PieChart>
         <ChartTooltip
