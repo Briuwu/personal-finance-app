@@ -31,6 +31,7 @@ export default {
         "army-green": "var(--army-green)",
         gold: "var(--gold)",
         orange: "var(--orange)",
+        pink: "var(--pink)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
