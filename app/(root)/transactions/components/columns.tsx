@@ -28,7 +28,11 @@ export const columns: ColumnDef<Transaction>[] = [
     header: "Category",
     cell: ({ row }) => {
       const category = row.getValue("category") as string;
-      return <div className="text-preset-5 text-grey-500">{category}</div>;
+      return (
+        <div className="text-preset-5 text-grey-500">
+          {category.charAt(0).toUpperCase() + category.slice(1)}
+        </div>
+      );
     },
   },
   {

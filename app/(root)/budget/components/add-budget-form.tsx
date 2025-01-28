@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   category: z.string(),
-  maximum: z.number().min(1),
+  maximum: z.string().regex(/^\d+(\.\d{1,2})?$/),
   theme: z.string(),
 });
 
@@ -32,7 +32,7 @@ export const AddBudgetForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       category: "",
-      maximum: 0,
+      maximum: "",
       theme: "",
     },
   });
@@ -180,7 +180,7 @@ export const AddBudgetForm = () => {
                   </SelectItem>
                   <SelectItem value="pink">
                     <div className="flex items-center gap-3">
-                      <div className="bg-pink h-4 w-4 rounded-full" />
+                      <div className="h-4 w-4 rounded-full bg-pink" />
                       <span>Pink</span>
                     </div>
                   </SelectItem>

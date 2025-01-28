@@ -1,6 +1,7 @@
 import { relations } from "drizzle-orm";
 import {
   boolean,
+  integer,
   numeric,
   pgTable,
   serial,
@@ -26,9 +27,13 @@ export const transactions = pgTable("transactions", {
   userId: text("user_id")
     .notNull()
     .references(() => users.userId, { onDelete: "cascade" }),
+  budgetId: integer("budget_id")
+    .notNull()
+    .references(() => budgets.id, {
+      onDelete: "cascade",
+    }),
   category: text("category").notNull(),
   name: text("name").notNull(),
-  avatar: text("avatar").notNull(),
   amount: numeric("amount", { precision: 100, scale: 2 }).notNull(),
   recurring: boolean("recurring").notNull(),
   date: timestamp("date").notNull(),
@@ -39,6 +44,10 @@ export const transactionsRelations = relations(transactions, ({ one }) => ({
   user: one(users, {
     fields: [transactions.userId],
     references: [users.userId],
+  }),
+  budget: one(budgets, {
+    fields: [transactions.budgetId],
+    references: [budgets.id],
   }),
 }));
 
@@ -53,11 +62,12 @@ export const budgets = pgTable("budgets", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
-export const budgetsRelations = relations(budgets, ({ one }) => ({
+export const budgetsRelations = relations(budgets, ({ one, many }) => ({
   user: one(users, {
     fields: [budgets.userId],
     references: [users.userId],
   }),
+  transactions: many(transactions),
 }));
 
 export const pots = pgTable("pots", {
@@ -78,3 +88,9 @@ export const potsRelations = relations(pots, ({ one }) => ({
     references: [users.userId],
   }),
 }));
+
+export type BudgetInsert = typeof budgets.$inferInsert;
+export type BudgetSelect = typeof budgets.$inferSelect;
+
+export type TransactionInsert = typeof transactions.$inferInsert;
+export type TransactionSelect = typeof transactions.$inferSelect;
