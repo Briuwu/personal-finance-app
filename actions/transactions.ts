@@ -5,10 +5,11 @@ import { budgets, TransactionInsert, transactions } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { cache } from "react";
 
 type Transaction = Omit<TransactionInsert, "userId" | "budgetId">;
 
-export const getTransactions = async () => {
+export const getTransactions = cache(async () => {
   const { userId } = await auth();
 
   if (!userId) {
@@ -17,10 +18,11 @@ export const getTransactions = async () => {
 
   const transactionsData = await db.query.transactions.findMany({
     where: eq(transactions.userId, userId),
+    orderBy: (transactions, { desc }) => [desc(transactions.createdAt)],
   });
 
   return transactionsData;
-};
+});
 
 export const createTransaction = async (transaction: Transaction) => {
   const { userId } = await auth();

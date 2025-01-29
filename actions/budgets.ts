@@ -33,8 +33,11 @@ export const getBudgets = cache(async () => {
   const budgetsData = await db.query.budgets.findMany({
     where: eq(budgets.userId, userId),
     with: {
-      transactions: true,
+      transactions: {
+        orderBy: (transactions, { desc }) => [desc(transactions.createdAt)],
+      },
     },
+    orderBy: (budgets, { desc }) => [desc(budgets.createdAt)],
   });
 
   const transformedBudgets = budgetsData.map((budget) => {

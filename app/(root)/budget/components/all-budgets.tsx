@@ -47,7 +47,12 @@ export const AllBudgets = ({ budgets }: Props) => {
           <div className="space-y-5 rounded-xl bg-white p-8" key={budget.id}>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="h-4 w-4 rounded-full bg-green" />
+                <div
+                  className="h-4 w-4 rounded-full"
+                  style={{
+                    backgroundColor: budget.theme,
+                  }}
+                />
                 <h3 className="text-preset-3 text-grey-900">
                   {budget.category.charAt(0).toUpperCase() +
                     budget.category.slice(1)}
@@ -82,7 +87,7 @@ export const AllBudgets = ({ budgets }: Props) => {
               <Progress
                 value={(totalSpent / totalMaximum) * 100}
                 className="h-8 rounded bg-beige-100"
-                innerClassName="bg-green"
+                innerClassName={budget.theme}
               />
               <div className="grid grid-cols-2">
                 <div className="space-y-1 border-l-4 border-green pl-4">
@@ -112,7 +117,7 @@ export const AllBudgets = ({ budgets }: Props) => {
               </div>
               <div className="divide-y-2">
                 {budget.transactions.length > 0 ? (
-                  budget.transactions.map((transaction) => {
+                  budget.transactions.slice(0, 4).map((transaction) => {
                     const amount = Number(transaction.amount);
                     const isNegative = amount < 0;
 
