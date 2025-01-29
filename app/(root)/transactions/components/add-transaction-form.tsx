@@ -30,7 +30,7 @@ import { createTransaction } from "@/actions/transactions";
 const formSchema = z.object({
   name: z.string().min(3),
   category: z.string(),
-  amount: z.string().regex(/^\d+(\.\d{1,2})?$/),
+  amount: z.string().regex(/^-?\d+(\.\d{1,2})?$/),
   date: z.coerce.date(),
   recurring: z.boolean(),
 });

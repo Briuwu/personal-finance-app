@@ -3,6 +3,7 @@
 import { db } from "@/db";
 import { BudgetInsert, budgets } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
+import { eq } from "drizzle-orm";
 import { cache } from "react";
 
 type Budget = Omit<BudgetInsert, "userId">;
@@ -21,6 +22,38 @@ export const createBudget = async (budget: Budget) => {
     theme: budget.theme,
   });
 };
+
+export const getBudgets = cache(async () => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("You must be signed in to get budgets");
+  }
+
+  const budgetsData = await db.query.budgets.findMany({
+    where: eq(budgets.userId, userId),
+    with: {
+      transactions: true,
+    },
+  });
+
+  const transformedBudgets = budgetsData.map((budget) => {
+    const totalSpent = budget.transactions.reduce(
+      (acc, transaction) => acc + Number(transaction.amount),
+      0,
+    );
+    return {
+      id: budget.id,
+      category: budget.category,
+      maximum: budget.maximum,
+      theme: budget.theme,
+      amount: totalSpent,
+      transactions: budget.transactions,
+    };
+  });
+
+  return transformedBudgets;
+});
 
 export const getBudgetCategories = cache(async () => {
   const { userId } = await auth();
