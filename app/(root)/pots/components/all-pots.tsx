@@ -15,6 +15,8 @@ import ellipsisIcon from "@/public/icon-ellipsis.svg";
 import { Progress } from "@/components/ui/progress";
 import { AddMoney } from "./add-money";
 import { WithdrawMoney } from "./withdraw-money";
+import { EditPot } from "./edit-pot";
+import { DeletePot } from "./delete-pot";
 
 type Props = {
   pots: PotSelect[];
@@ -51,12 +53,23 @@ export const AllPots = ({ pots }: Props) => {
                     <DropdownMenuLabel className="sr-only">
                       Actions
                     </DropdownMenuLabel>
-                    <DropdownMenuItem className="text-preset-4 text-grey-900">
-                      Edit Pot
+                    <DropdownMenuItem
+                      asChild
+                      className="text-preset-4 text-grey-900"
+                    >
+                      <EditPot
+                        name={pot.name}
+                        target={pot.target}
+                        theme={pot.theme}
+                        potId={pot.id}
+                      />
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="text-preset-4 text-red">
-                      Delete Pot
+                    <DropdownMenuItem
+                      asChild
+                      className="text-preset-4 text-red"
+                    >
+                      <DeletePot potId={pot.id} />
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>

@@ -46,6 +46,37 @@ export const createPot = async (data: CreatePot) => {
   revalidatePath("/pots");
 };
 
+export const updatePot = async (potId: number, data: CreatePot) => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("You must be signed in to update a pot");
+  }
+
+  await db
+    .update(pots)
+    .set({
+      name: data.name,
+      target: data.target,
+      theme: data.theme,
+    })
+    .where(and(eq(pots.userId, userId), eq(pots.id, potId)));
+
+  revalidatePath("/pots");
+};
+
+export const onDeletePot = async (potId: number) => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("You must be signed in to delete a pot");
+  }
+
+  await db.delete(pots).where(and(eq(pots.userId, userId), eq(pots.id, potId)));
+
+  revalidatePath("/pots");
+};
+
 export const addMoney = async (potId: number, amount: string) => {
   const { userId } = await auth();
 
