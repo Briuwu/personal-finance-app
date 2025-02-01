@@ -97,7 +97,13 @@ export const AllPots = ({ pots }: Props) => {
                   theme={pot.theme}
                   potId={pot.id}
                 />
-                <WithdrawMoney />
+                <WithdrawMoney
+                  name={pot.name}
+                  total={pot.total}
+                  target={pot.target}
+                  theme={pot.theme}
+                  potId={pot.id}
+                />
               </div>
             </div>
           );

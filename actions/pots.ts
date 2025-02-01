@@ -69,3 +69,27 @@ export const addMoney = async (potId: number, amount: string) => {
 
   revalidatePath("/pots");
 };
+
+export const withdrawMoney = async (potId: number, amount: string) => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("You must be signed in to withdraw money from a pot");
+  }
+
+  const pot = await db.query.pots.findFirst({
+    where: and(eq(pots.userId, userId), eq(pots.id, potId)),
+    columns: {
+      total: true,
+    },
+  });
+
+  await db
+    .update(pots)
+    .set({
+      total: String(Number(pot!.total) - Number(amount)),
+    })
+    .where(and(eq(pots.userId, userId), eq(pots.id, potId)));
+
+  revalidatePath("/pots");
+};
