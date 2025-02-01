@@ -20,6 +20,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { useTransition } from "react";
+import { createBudget } from "@/actions/budgets";
 
 const formSchema = z.object({
   category: z.string(),
@@ -28,6 +30,7 @@ const formSchema = z.object({
 });
 
 export const AddBudgetForm = () => {
+  const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,17 +41,16 @@ export const AddBudgetForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>,
-      );
-    } catch (error) {
-      console.error("Form submission error", error);
-      toast.error("Failed to submit the form. Please try again.");
-    }
+    startTransition(async () => {
+      try {
+        await createBudget(values);
+        toast.success("Budget created successfully");
+        form.reset();
+      } catch (error) {
+        console.error("Form submission error", error);
+        toast.error("Failed to submit the form. Please try again.");
+      }
+    });
   }
 
   return (
@@ -62,7 +64,11 @@ export const AddBudgetForm = () => {
               <FormLabel className="text-preset-5 font-bold text-grey-500">
                 Budget Category
               </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                disabled={isPending}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue
@@ -104,6 +110,7 @@ export const AddBudgetForm = () => {
                   type="number"
                   {...field}
                   className="text-preset-4 placeholder:text-preset-4 py-3 text-grey-900 placeholder:text-grey-500"
+                  disabled={isPending}
                 />
               </FormControl>
 
@@ -120,7 +127,11 @@ export const AddBudgetForm = () => {
               <FormLabel className="text-preset-5 font-bold text-grey-500">
                 Theme
               </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                disabled={isPending}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue
@@ -203,7 +214,7 @@ export const AddBudgetForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={isPending}>
           Submit
         </Button>
       </form>

@@ -1,44 +1,37 @@
-const items = [
-  {
-    id: 1,
-    name: "Bills",
-    amount: 250,
-    total: 750,
-    theme: "var(--cyan)",
-  },
-  {
-    id: 2,
-    name: "Entertainment",
-    amount: 150,
-    total: 300,
-    theme: "var(--green)",
-  },
-  {
-    id: 3,
-    name: "Dining Out",
-    amount: 50,
-    total: 100,
-    theme: "var(--yellow)",
-  },
-  {
-    id: 4,
-    name: "Personal Care",
-    amount: 100,
-    total: 200,
-    theme: "var(--navy)",
-  },
-];
+import { BudgetSelect, TransactionSelect } from "@/db/schema";
 
-export const BudgetSummary = () => {
+type Budgets = Omit<BudgetSelect, "userId" | "createdAt"> & {
+  amount: number;
+  transactions: TransactionSelect[];
+};
+
+type Props = {
+  budgets: Budgets[];
+};
+
+export const BudgetSummary = ({ budgets }: Props) => {
   return (
     <div>
       <h2 className="text-preset-2 font-bold text-grey-900">
         Spending Summary
       </h2>
       <div className="my-4 divide-y-2">
-        {items.map((item) => {
-          const formattedAmount = item.amount.toFixed(2);
-          const formattedTotal = item.total.toFixed(2);
+        {budgets.map((item) => {
+          const totalSpent = item.transactions.reduce(
+            (acc, transaction) =>
+              Number(transaction.amount) < 0
+                ? acc + Math.abs(Number(transaction.amount))
+                : acc,
+            0,
+          );
+
+          const totalMaximum = item.transactions.reduce(
+            (acc, transaction) =>
+              Number(transaction.amount) > 0
+                ? acc + Number(transaction.amount)
+                : acc,
+            Number(item.maximum),
+          );
           return (
             <div className="py-4" key={item.id}>
               <div
@@ -47,12 +40,15 @@ export const BudgetSummary = () => {
                 }}
                 className="flex items-center justify-between border-l-4 pl-4"
               >
-                <p className="text-preset-4 text-grey-500">{item.name}</p>
+                <p className="text-preset-4 text-grey-500">
+                  {item.category.charAt(0).toUpperCase() +
+                    item.category.slice(1)}
+                </p>
                 <p className="text-preset-5 text-grey-500">
                   <span className="text-preset-3 text-grey-900">
-                    ${formattedAmount}
+                    ${totalSpent}
                   </span>{" "}
-                  of ${formattedTotal}
+                  of ${totalMaximum}
                 </p>
               </div>
             </div>

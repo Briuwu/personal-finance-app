@@ -1,5 +1,4 @@
 "use client";
-import data from "@/lib/data.json";
 import * as React from "react";
 import { Label, Pie, PieChart } from "recharts";
 
@@ -9,12 +8,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-
-const chartData = data.budgets.map((budget) => ({
-  category: budget.category,
-  maximum: budget.maximum,
-  fill: budget.theme,
-}));
+import { BudgetSelect, TransactionSelect } from "@/db/schema";
 
 const chartConfig = {
   budgets: {
@@ -36,12 +30,66 @@ const chartConfig = {
     label: "Personal Care",
     color: "var(--navy)",
   },
+  education: {
+    label: "Education",
+    color: "var(--pink)",
+  },
+  lifestyle: {
+    label: "Lifestyle",
+    color: "var(--purple)",
+  },
+  shopping: {
+    label: "Shopping",
+    color: "var(--orange)",
+  },
+  general: {
+    label: "General",
+    color: "var(--red)",
+  },
+  groceries: {
+    label: "Groceries",
+    color: "var(--blue)",
+  },
 } satisfies ChartConfig;
 
-export function BudgetsPieChart() {
+type Budgets = Omit<BudgetSelect, "userId" | "createdAt"> & {
+  amount: number;
+  transactions: TransactionSelect[];
+};
+
+type Props = {
+  budgets: Budgets[];
+};
+
+export function BudgetsPieChart({ budgets }: Props) {
+  const chartData = budgets.slice(0, 4).map((budget) => ({
+    category: budget.category,
+    maximum: Number(budget.maximum),
+    fill: budget.theme,
+    spent: budget.transactions.reduce(
+      (acc, transaction) =>
+        Number(transaction.amount) < 0
+          ? acc + Math.abs(Number(transaction.amount))
+          : acc,
+      0,
+    ),
+  }));
+
   const totalAmount = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.maximum, 0);
-  }, []);
+  }, [chartData]);
+
+  const totalSpent = React.useMemo(() => {
+    return budgets.map((budget) => {
+      return budget.transactions.reduce(
+        (acc, transaction) =>
+          Number(transaction.amount) < 0
+            ? acc + Math.abs(Number(transaction.amount))
+            : acc,
+        0,
+      );
+    });
+  }, [budgets]).reduce((acc, curr) => acc + curr, 0);
 
   return (
     <ChartContainer
@@ -55,7 +103,7 @@ export function BudgetsPieChart() {
         />
         <Pie
           data={chartData}
-          dataKey="maximum"
+          dataKey="spent"
           nameKey="category"
           innerRadius={60}
           strokeWidth={5}
@@ -73,9 +121,9 @@ export function BudgetsPieChart() {
                     <tspan
                       x={viewBox.cx}
                       y={viewBox.cy}
-                      className="text-preset-1 fill-foreground font-bold text-grey-900"
+                      className="text-preset-2 fill-foreground font-bold text-grey-900"
                     >
-                      ${totalAmount.toLocaleString()}
+                      ${totalSpent.toLocaleString()}
                     </tspan>
                     <tspan
                       x={viewBox.cx}

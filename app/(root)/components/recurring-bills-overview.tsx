@@ -7,12 +7,12 @@ export const RecurringBillsOverview = () => {
   return (
     <section className="space-y-8 rounded-xl bg-white p-8">
       <div className="flex items-center justify-between">
-        <h4 className="text-preset-2 text-grey-900">Budgets</h4>
+        <h4 className="text-preset-2 text-grey-900">Recurring Bills</h4>
         <Link
           href="/recurring-bills"
           className="text-preset-4 flex items-center gap-3 text-grey-500"
         >
-          Recurring Bills <Image src={caretRight} alt="" />
+          See Details <Image src={caretRight} alt="" />
         </Link>
       </div>
       <div className="space-y-3">
