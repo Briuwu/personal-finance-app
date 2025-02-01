@@ -67,7 +67,7 @@ export const AddBudgetForm = () => {
                   <SelectTrigger>
                     <SelectValue
                       placeholder="Select a category..."
-                      className="text-preset-4 placeholder:text-preset-4 py-3 text-grey-900 placeholder:text-grey-900"
+                      className="text-preset-4 placeholder:text-preset-4 py-3 text-grey-900 placeholder:text-grey-500"
                     />
                   </SelectTrigger>
                 </FormControl>
@@ -103,7 +103,7 @@ export const AddBudgetForm = () => {
                   placeholder="Input an amount..."
                   type="number"
                   {...field}
-                  className="text-preset-4 placeholder:text-preset-4 py-3 text-grey-900 placeholder:text-grey-900"
+                  className="text-preset-4 placeholder:text-preset-4 py-3 text-grey-900 placeholder:text-grey-500"
                 />
               </FormControl>
 
@@ -125,7 +125,7 @@ export const AddBudgetForm = () => {
                   <SelectTrigger>
                     <SelectValue
                       placeholder="Select a theme..."
-                      className="text-preset-4 placeholder:text-preset-4 py-3 text-grey-900 placeholder:text-grey-900"
+                      className="text-preset-4 placeholder:text-preset-4 py-3 text-grey-900 placeholder:text-grey-500"
                     />
                   </SelectTrigger>
                 </FormControl>
