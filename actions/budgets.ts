@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { BudgetInsert, budgets } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 import { cache } from "react";
 
 type Budget = Omit<BudgetInsert, "userId">;
@@ -21,6 +22,8 @@ export const createBudget = async (budget: Budget) => {
     maximum: budget.maximum,
     theme: budget.theme,
   });
+
+  revalidatePath("/budgets");
 };
 
 export const getBudgets = cache(async () => {

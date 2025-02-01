@@ -94,3 +94,6 @@ export type BudgetSelect = typeof budgets.$inferSelect;
 
 export type TransactionInsert = typeof transactions.$inferInsert;
 export type TransactionSelect = typeof transactions.$inferSelect;
+
+export type PotInsert = typeof pots.$inferInsert;
+export type PotSelect = typeof pots.$inferSelect;

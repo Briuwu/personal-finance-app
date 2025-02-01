@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 
+import { Toaster } from "@/components/ui/sonner";
+
 import { Public_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -24,9 +26,10 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${publicSans.variable} bg-beige-100 w-full antialiased`}
+          className={`${publicSans.variable} w-full bg-beige-100 antialiased`}
         >
           {children}
+          <Toaster richColors />
         </body>
       </html>
     </ClerkProvider>
