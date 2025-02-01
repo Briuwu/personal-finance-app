@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+
 import {
   ColumnDef,
   flexRender,
@@ -27,6 +30,7 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 
 import searchIcon from "@/public/icon-search.svg";
+import { Button } from "@/components/ui/button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,6 +41,10 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const category = searchParams.get("category");
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
@@ -54,6 +62,15 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
   });
+
+  useEffect(() => {
+    if (category) {
+      table.getColumn("category")?.setFilterValue(category);
+    } else {
+      table.getColumn("category")?.setFilterValue(undefined);
+    }
+  }, [searchParams, table, category]);
+
   return (
     <div className="rounded-md border bg-white p-8">
       <div className="flex items-center justify-between">
@@ -68,6 +85,16 @@ export function DataTable<TData, TValue>({
           />
           <Image src={searchIcon} alt="" className="absolute right-3 z-50" />
         </div>
+        {category && (
+          <Button
+            onClick={() => {
+              router.push("/transactions");
+            }}
+            className="text-preset-4 font-bold text-white"
+          >
+            Clear Filter
+          </Button>
+        )}
       </div>
       <div>
         <Table>

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +16,7 @@ import Image from "next/image";
 import caretRightIcon from "@/public/icon-caret-right.svg";
 import ellipsisIcon from "@/public/icon-ellipsis.svg";
 import { BudgetSelect, TransactionSelect } from "@/db/schema";
+import Link from "next/link";
 
 type Budgets = Omit<BudgetSelect, "userId" | "createdAt"> & {
   amount: number;
@@ -111,8 +114,11 @@ export const AllBudgets = ({ budgets }: Props) => {
                 <Button
                   className="text-preset-4 p-0 text-grey-500"
                   variant={"ghost"}
+                  asChild
                 >
-                  See All <Image src={caretRightIcon} alt="" />
+                  <Link href={`/transactions?category=${budget.category}`}>
+                    See All <Image src={caretRightIcon} alt="" />
+                  </Link>
                 </Button>
               </div>
               <div className="divide-y-2">
