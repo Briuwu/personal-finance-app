@@ -130,67 +130,67 @@ export const AddBudgetForm = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="max-h-[300px] overflow-auto">
-                  <SelectItem value="red">
+                  <SelectItem value="#c94736">
                     <div className="flex items-center gap-3">
                       <div className="h-4 w-4 rounded-full bg-red" />
                       <span>Red</span>
                     </div>
                   </SelectItem>
-                  <SelectItem value="purple">
+                  <SelectItem value="#826cb0">
                     <div className="flex items-center gap-3">
                       <div className="h-4 w-4 rounded-full bg-purple" />
                       <span>Purple</span>
                     </div>
                   </SelectItem>
-                  <SelectItem value="turquoise">
+                  <SelectItem value="#597c7c">
                     <div className="flex items-center gap-3">
                       <div className="h-4 w-4 rounded-full bg-turquoise" />
                       <span>Turquoise</span>
                     </div>
                   </SelectItem>
-                  <SelectItem value="brown">
+                  <SelectItem value="#93674f">
                     <div className="flex items-center gap-3">
                       <div className="h-4 w-4 rounded-full bg-brown" />
                       <span>Brown</span>
                     </div>
                   </SelectItem>
-                  <SelectItem value="magenta">
+                  <SelectItem value="#934f6f">
                     <div className="flex items-center gap-3">
                       <div className="h-4 w-4 rounded-full bg-magenta" />
                       <span>Magenta</span>
                     </div>
                   </SelectItem>
-                  <SelectItem value="blue">
+                  <SelectItem value="#3f82b2">
                     <div className="flex items-center gap-3">
                       <div className="h-4 w-4 rounded-full bg-blue" />
                       <span>Blue</span>
                     </div>
                   </SelectItem>
-                  <SelectItem value="grey">
+                  <SelectItem value="#97a0ac">
                     <div className="flex items-center gap-3">
                       <div className="h-4 w-4 rounded-full bg-navy-grey" />
                       <span>Grey</span>
                     </div>
                   </SelectItem>
-                  <SelectItem value="army">
+                  <SelectItem value="#7f9161">
                     <div className="flex items-center gap-3">
                       <div className="h-4 w-4 rounded-full bg-army-green" />
                       <span>Army</span>
                     </div>
                   </SelectItem>
-                  <SelectItem value="pink">
+                  <SelectItem value="#af81ba">
                     <div className="flex items-center gap-3">
                       <div className="h-4 w-4 rounded-full bg-pink" />
                       <span>Pink</span>
                     </div>
                   </SelectItem>
-                  <SelectItem value="yellow">
+                  <SelectItem value="#f2cdac">
                     <div className="flex items-center gap-3">
                       <div className="h-4 w-4 rounded-full bg-yellow" />
                       <span>Yellow</span>
                     </div>
                   </SelectItem>
-                  <SelectItem value="orange">
+                  <SelectItem value="#be6c49">
                     <div className="flex items-center gap-3">
                       <div className="h-4 w-4 rounded-full bg-orange" />
                       <span>Orange</span>
@@ -203,7 +203,9 @@ export const AddBudgetForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="w-full">
+          Submit
+        </Button>
       </form>
     </Form>
   );
