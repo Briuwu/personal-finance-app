@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { budgets, TransactionInsert, transactions } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { cache } from "react";
 
@@ -53,3 +53,20 @@ export const createTransaction = async (transaction: Transaction) => {
 
   revalidatePath("/transactions");
 };
+
+export const getRecurringTransactions = cache(async () => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("You must be signed in to view transactions");
+  }
+
+  const transactionsData = await db.query.transactions.findMany({
+    where: and(
+      eq(transactions.userId, userId),
+      eq(transactions.recurring, true),
+    ),
+  });
+
+  return transactionsData;
+});
