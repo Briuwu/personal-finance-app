@@ -9,7 +9,9 @@ type Props = {
 };
 
 export const PotsOverview = ({ pots }: Props) => {
-  const totalSaved = pots.reduce((acc, pot) => acc + Number(pot.total), 0);
+  const totalSaved = pots
+    .slice(0, 4)
+    .reduce((acc, pot) => acc + Number(pot.total), 0);
   return (
     <section className="space-y-5 rounded-xl bg-white p-8">
       <div className="flex items-center justify-between">
@@ -31,7 +33,7 @@ export const PotsOverview = ({ pots }: Props) => {
         </div>
         <div className="grid grid-cols-2 grid-rows-2 gap-4">
           {pots.length > 0 ? (
-            pots.map((item) => (
+            pots.slice(0, 4).map((item) => (
               <div
                 key={item.id}
                 style={{

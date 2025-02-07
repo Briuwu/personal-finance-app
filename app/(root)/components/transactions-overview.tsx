@@ -21,7 +21,7 @@ export const TransactionsOverview = ({ transactions }: Props) => {
           See Details <Image src={caretRight} alt="" />
         </Link>
       </div>
-      <div className="max-h-[410px] min-h-[410px] divide-y overflow-auto">
+      <div className="h-full max-h-[410px] min-h-[438px] divide-y overflow-auto">
         {transactions.length > 0 ? (
           transactions.slice(0, 10).map((transaction) => {
             const date = new Date(transaction.date);

@@ -26,7 +26,7 @@ export const AllPots = ({ pots }: Props) => {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       {pots.length === 0 ? (
-        <div className="col-span-full flex h-64 items-center justify-center text-grey-500">
+        <div className="col-span-full flex items-center justify-center text-grey-500">
           No pots yet
         </div>
       ) : (

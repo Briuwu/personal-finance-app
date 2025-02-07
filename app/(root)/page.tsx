@@ -14,10 +14,28 @@ export default async function Home() {
     getAllPots(),
   ]);
 
+  const currentBalance = budgets.reduce(
+    (acc, budget) => acc + Number(budget.maximum),
+    0,
+  );
+
+  const income = pots.reduce((acc, pot) => acc + Number(pot.total), 0);
+
+  const expenses = transactions.reduce((acc, transaction) => {
+    if (Number(transaction.amount) < 0) {
+      return acc + Math.abs(Number(transaction.amount));
+    }
+    return acc;
+  }, 0);
+
   return (
     <div>
       <h1 className="text-preset-1 text-grey-900">Overview</h1>
-      <Balances />
+      <Balances
+        currentBalance={currentBalance}
+        income={income}
+        expenses={expenses}
+      />
       <div className="grid gap-4 lg:grid-cols-2">
         <div className="space-y-4">
           <PotsOverview pots={pots} />

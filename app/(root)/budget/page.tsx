@@ -12,13 +12,21 @@ export default async function BudgetPage() {
         <h1 className="text-preset-1 font-bold text-grey-900">Budgets</h1>
         <AddBudgetBtn />
       </div>
-      <div className="grid items-start gap-6 lg:grid-cols-[.5fr,1fr]">
-        <div className="grid space-y-8 rounded-xl bg-white px-5 py-6 md:grid-cols-2 lg:grid-cols-1">
-          <BudgetsPieChart budgets={budgets} />
-          <BudgetSummary budgets={budgets} />
+      {budgets.length > 0 ? (
+        <div className="grid items-start gap-6 lg:grid-cols-[.5fr,1fr]">
+          <div className="grid space-y-8 rounded-xl bg-white px-5 py-6 md:grid-cols-2 lg:grid-cols-1">
+            <BudgetsPieChart budgets={budgets} />
+            <BudgetSummary budgets={budgets} />
+          </div>
+          <AllBudgets budgets={budgets} />
         </div>
-        <AllBudgets budgets={budgets} />
-      </div>
+      ) : (
+        <div className="py-4">
+          <p className="text-preset-4 text-center text-grey-500">
+            No budgets found
+          </p>
+        </div>
+      )}
     </section>
   );
 }

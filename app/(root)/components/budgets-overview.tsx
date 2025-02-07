@@ -21,17 +21,19 @@ export const BudgetsOverview = ({ budgets }: Props) => {
       <div className="flex items-center justify-between">
         <h4 className="text-preset-2 text-grey-900">Budgets</h4>
         <Link
-          href="/pots"
+          href="/budgets"
           className="text-preset-4 flex items-center gap-3 text-grey-500"
         >
           See Details <Image src={caretRight} alt="" />
         </Link>
       </div>
       <div className="my-auto grid md:grid-cols-[1fr,.35fr]">
-        {budgets.length > 0 && <BudgetsPieChart budgets={budgets} />}
+        {budgets.length > 0 && (
+          <BudgetsPieChart budgets={budgets} isOverview={true} />
+        )}
         <div className="grid grid-cols-2 grid-rows-4 gap-4 md:grid-cols-1">
           {budgets.length > 0 ? (
-            budgets.map((budget, idx) => (
+            budgets.slice(0, 4).map((budget, idx) => (
               <div
                 key={idx}
                 style={{

@@ -59,10 +59,12 @@ type Budgets = Omit<BudgetSelect, "userId" | "createdAt"> & {
 
 type Props = {
   budgets: Budgets[];
+  isOverview?: boolean;
 };
 
-export function BudgetsPieChart({ budgets }: Props) {
-  const chartData = budgets.slice(0, 4).map((budget) => ({
+export function BudgetsPieChart({ budgets, isOverview }: Props) {
+  const END = isOverview ? 4 : budgets.length;
+  const chartData = budgets.slice(0, END).map((budget) => ({
     category: budget.category,
     maximum: Number(budget.maximum),
     fill: budget.theme,
@@ -80,16 +82,8 @@ export function BudgetsPieChart({ budgets }: Props) {
   }, [chartData]);
 
   const totalSpent = React.useMemo(() => {
-    return budgets.map((budget) => {
-      return budget.transactions.reduce(
-        (acc, transaction) =>
-          Number(transaction.amount) < 0
-            ? acc + Math.abs(Number(transaction.amount))
-            : acc,
-        0,
-      );
-    });
-  }, [budgets]).reduce((acc, curr) => acc + curr, 0);
+    return chartData.reduce((acc, curr) => acc + curr.spent, 0);
+  }, [chartData]);
 
   return (
     <ChartContainer
